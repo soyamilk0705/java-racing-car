@@ -53,7 +53,7 @@ public class ValidationUtilsTest {
     @DisplayName("문자열 숫자 변경 시 숫자 이외의 값 입력으로 예외 발생")
     void stringToIntInputNotNumber1(){
         // given, when
-        NumberFormatException fail = assertThrows(NumberFormatException.class,
+        RuntimeException fail = assertThrows(RuntimeException.class,
                 () -> ValidationUtils.stringToInt("문자열"));
 
         // then
@@ -64,7 +64,7 @@ public class ValidationUtilsTest {
     @DisplayName("문자열 숫자 변경 시 숫자 이외의 값이 있어 예외 발생")
     void stringToIntInputNotNumber2(){
         // given, when
-        NumberFormatException fail = assertThrows(NumberFormatException.class,
+        RuntimeException fail = assertThrows(RuntimeException.class,
                 () -> ValidationUtils.stringToInt("1/2"));
 
         // then
@@ -82,7 +82,7 @@ public class ValidationUtilsTest {
     @DisplayName("문자열 숫자 변경 시 음수로 예외 발생")
     void stringToIntInputNegativeNumber(){
         // given, when
-        IllegalArgumentException fail = assertThrows(IllegalArgumentException.class,
+        RuntimeException fail = assertThrows(RuntimeException.class,
                 () -> ValidationUtils.isPositiveNumber(-2));
 
         // then

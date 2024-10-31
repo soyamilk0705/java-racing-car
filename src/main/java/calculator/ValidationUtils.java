@@ -13,8 +13,8 @@ public class ValidationUtils {
 
         try {
             value = Integer.parseInt(input);
-        } catch (NumberFormatException ex){
-            throw new NumberFormatException(ErrorMessages.INVALID_INPUT);
+        } catch (RuntimeException ex){
+            throw new RuntimeException(ErrorMessages.INVALID_INPUT);
         }
 
         return value;
@@ -22,7 +22,7 @@ public class ValidationUtils {
 
     public static void isPositiveNumber(int number){
         if (number < 0){
-            throw new IllegalArgumentException(ErrorMessages.INVALID_NEGATIVE_NUMBER_INPUT);
+            throw new RuntimeException(ErrorMessages.INVALID_NEGATIVE_NUMBER_INPUT);
         }
     }
 }

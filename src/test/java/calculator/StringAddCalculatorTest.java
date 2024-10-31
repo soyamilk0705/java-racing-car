@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringAddCalculatorTest {
@@ -73,7 +74,7 @@ public class StringAddCalculatorTest {
     @DisplayName("문자열 덧셈 계산기 숫자 이외의 값 입력")
     void splitAndSum_inputNotNumber(){
         // given, when
-        NumberFormatException fail = assertThrows(NumberFormatException.class, () -> StringAddCalculator.splitAndSum("문자열"));
+        RuntimeException fail = assertThrows(RuntimeException.class, () -> StringAddCalculator.splitAndSum("문자열"));
 
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_INPUT);
@@ -83,7 +84,7 @@ public class StringAddCalculatorTest {
     @DisplayName("문자열 덧셈 계산기 지정되어 있지 않은 구분자 입력")
     void splitAndSum_inputInvalidDelimiter(){
         // given, when
-        NumberFormatException fail = assertThrows(NumberFormatException.class, () -> StringAddCalculator.splitAndSum("1;2;3;"));
+        RuntimeException fail = assertThrows(RuntimeException.class, () -> StringAddCalculator.splitAndSum("1;2;3;"));
 
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_INPUT);
@@ -93,10 +94,16 @@ public class StringAddCalculatorTest {
     @DisplayName("문자열 덧셈 계산기 음수 입력")
     void splitAndSum_inputNegativeNumber(){
         // given, when
-        IllegalArgumentException fail = assertThrows(IllegalArgumentException.class, () -> StringAddCalculator.splitAndSum("1,-2,3"));
+        RuntimeException fail = assertThrows(RuntimeException.class, () -> StringAddCalculator.splitAndSum("1,-2,3"));
 
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_NEGATIVE_NUMBER_INPUT);
+    }
+
+    @Test
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 
 

@@ -148,12 +148,9 @@ public class StringSplitterTest {
         assertThat(response).isFalse();
     }
 
-
-
     @Test
     @DisplayName("콤마 구분자 분리")
     void splitDelimiter_comma(){
-
         // when
         StringSplitter splitter = new StringSplitter("1,2");
         String[] response = splitter.splitDelimiter();

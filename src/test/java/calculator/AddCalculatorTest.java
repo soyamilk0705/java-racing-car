@@ -42,7 +42,7 @@ public class AddCalculatorTest {
         AddCalculator addCalculator = new AddCalculator(new String[]{"1", "-2", "3"});
 
         // when
-        IllegalArgumentException fail = assertThrows(IllegalArgumentException.class, addCalculator::sum);
+        RuntimeException fail = assertThrows(RuntimeException.class, addCalculator::sum);
 
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_NEGATIVE_NUMBER_INPUT);
@@ -55,7 +55,7 @@ public class AddCalculatorTest {
         AddCalculator addCalculator = new AddCalculator(new String[]{"1", "문", "3"});
 
         // when
-        NumberFormatException fail = assertThrows(NumberFormatException.class, addCalculator::sum);
+        RuntimeException fail = assertThrows(RuntimeException.class, addCalculator::sum);
 
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_INPUT);

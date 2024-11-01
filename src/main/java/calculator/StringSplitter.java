@@ -12,16 +12,14 @@ public class StringSplitter {
     }
 
     public String[] split() {
-        if (isContainsCustomDelimiter()){
+        if (isContainsCustomDelimiter()) {
             return splitCustomDelimiter();
         }
-
-        if (isContainsDelimiter()){
+        if (isContainsDelimiter()) {
             return splitDelimiter();
         }
 
         return new String[]{input};
-
     }
 
     public boolean isContainsCustomDelimiter(){

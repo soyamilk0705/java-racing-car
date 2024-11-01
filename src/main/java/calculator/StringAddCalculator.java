@@ -1,18 +1,22 @@
 package calculator;
 
-public class StringAddCalculator {
+import calculator.utils.ValidationUtils;
 
+public class StringAddCalculator {
     public static int splitAndSum(String input) {
-        if (ValidationUtils.isEmptyOrNull(input)){
-            return 0;
+        if (ValidationUtils.isEmptyOrNull(input)) return 0;
+
+        String[] numbers = inputSplit(input);
+
+        if (ValidationUtils.isSingleNumber(numbers)) {
+            return ValidationUtils.stringToInt(numbers[0]);
         }
 
-        StringSplitter splitter = new StringSplitter(input);
-        String[] stringNumbers = splitter.split();
+        return new AddCalculator(numbers).add();
+    }
 
-        AddCalculator calculator = new AddCalculator(stringNumbers);
-        return calculator.sum();
-
+    public static String[] inputSplit(String input){
+        return new StringSplitter(input).split();
     }
 
 }

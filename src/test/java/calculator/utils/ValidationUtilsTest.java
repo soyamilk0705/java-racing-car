@@ -1,4 +1,4 @@
-package calculator;
+package calculator.utils;
 
 import calculator.message.ErrorMessages;
 import org.junit.jupiter.api.DisplayName;
@@ -88,6 +88,37 @@ public class ValidationUtilsTest {
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_NEGATIVE_NUMBER_INPUT);
     }
+
+    @Test
+    @DisplayName("단일 문자열인지 확인")
+    void isSingleNumber1(){
+        // given, when
+        boolean response = ValidationUtils.isSingleNumber(new String[]{"12"});
+
+        // then
+        assertThat(response).isTrue();
+    }
+
+    @Test
+    @DisplayName("단일 문자열인지 확인")
+    void isSingleNumber2(){
+        // given, when
+        boolean response = ValidationUtils.isSingleNumber(new String[]{"12"});
+
+        // then
+        assertThat(response).isTrue();
+    }
+
+    @Test
+    @DisplayName("단일 문자열이 아닌 경우 false 반환")
+    void isSingleNumber_false1(){
+        // given, when
+        boolean response = ValidationUtils.isSingleNumber(new String[]{"12", "33", "54"});
+
+        // then
+        assertThat(response).isFalse();
+    }
+
 
 
 }

@@ -2,6 +2,8 @@ package calculator;
 
 import calculator.utils.ValidationUtils;
 
+import java.util.Arrays;
+
 public class AddCalculator {
     private final String[] numbers;
 
@@ -10,14 +12,9 @@ public class AddCalculator {
     }
 
     public int add() {
-        int result = 0;
-
-        for (String number : numbers) {
-            int num = validateAndConvert(number);
-            result += num;
-        }
-
-        return result;
+        return Arrays.stream(numbers)
+                .mapToInt(this::validateAndConvert)
+                .sum();
     }
 
     public int validateAndConvert(String number){

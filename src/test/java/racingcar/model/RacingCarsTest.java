@@ -8,7 +8,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RacingCarsTest {
-
     private RacingCars cars;
 
     @BeforeEach
@@ -18,12 +17,15 @@ public class RacingCarsTest {
 
 
     @Test
-    @DisplayName("레이싱카 리스트 객체 생성")
-    void RacingCars(){
-        // then
+    @DisplayName("레이싱카 이름으로 생성자에서 리스트 객체 생성")
+    void racingCars(){
+        // given, when
         List<RacingCar> response = cars.getCars();
 
+        // then
         assertEquals(response.size(), 2);
+        assertEquals(response.get(0).getName(), "red");
+        assertEquals(response.get(1).getName(), "blue");
     }
 
 
@@ -39,20 +41,6 @@ public class RacingCarsTest {
 
         // then
         assertEquals(response, car1.getName());
-    }
-
-    @Test
-    @DisplayName("레이싱카 이름으로 리스트 객체 생성")
-    void createCar(){
-        // given
-
-        // when
-        List<RacingCar> response = cars.createCar(new String[]{"red", "blue"});
-
-        // then
-        assertEquals(response.size(), 2);
-        assertEquals(response.get(0).getName(), "red");
-        assertEquals(response.get(1).getName(), "blue");
     }
 
     @Test

@@ -1,14 +1,13 @@
 package racingcar.scanner;
 
 import racingcar.validation.InputValidator;
-import racingcar.message.ErrorMessages;
+import racingcar.message.RacingCarMessages;
 
 import java.util.Scanner;
 
 public class RacingCarScanner {
     private final Scanner scanner;
     private final InputValidator validator;
-    private String[] inputArr;
 
     public RacingCarScanner(){
         this.scanner = new Scanner(System.in);
@@ -16,43 +15,44 @@ public class RacingCarScanner {
     }
 
     public String[] inputCarNames(){
-        boolean isCollect = false;
-
-        while(!isCollect){
-            System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
-            String input = scanner.nextLine();
+        while (true) {
+            String input = getInputWithMessage(RacingCarMessages.INPUT_CAR_NAMES);
 
             if (validator.isEmptyInput(input)) {
-                System.out.println(ErrorMessages.INVALID_INPUT_EMPTY);
                 continue;
             }
 
-            inputArr = splitComma(input);
-            isCollect = validator.checkValidInput(inputArr);
-        }
+            String[] inputArr = splitComma(input);
 
-        return inputArr;
+            if (validator.isValidCarName(inputArr)){
+                return inputArr;
+            }
+
+            System.out.println(RacingCarMessages.INVALID_INPUT_CAR_NAME);
+
+        }
     }
 
 
     public int inputRepeat() {
-        boolean isCollect = false;
-        String repeatString = "";
+        String repeatString;
 
-        while(!isCollect){
-            System.out.println("시도할 회수는 몇회인가요?");
-            repeatString = scanner.nextLine();
+        while(true){
+            repeatString = getInputWithMessage(RacingCarMessages.INPUT_REPEAT_NUM);
 
             if (validator.isEmptyInput(repeatString)){
-                System.out.println(ErrorMessages.INVALID_INPUT_EMPTY);
                 continue;
             }
 
-            isCollect = validator.isNumberInput(repeatString);
+            if (validator.isNumberInput(repeatString)){
+                return Integer.parseInt(repeatString);
+            }
         }
+    }
 
-        return Integer.parseInt(repeatString);
-
+    public String getInputWithMessage(String message){
+        System.out.println(message);
+        return scanner.nextLine();
     }
 
 

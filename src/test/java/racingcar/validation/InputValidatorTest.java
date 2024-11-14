@@ -17,9 +17,9 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("자동차 이름을 담은 배열이 빈값으로 false 리턴")
-    void checkValidInput_EmptyArray(){
+    void isValidCarName_EmptyArray(){
         // given, when
-        boolean response = validator.checkValidInput(new String[]{});
+        boolean response = validator.isValidCarName(new String[]{});
 
         // then
         assertFalse(response);
@@ -27,7 +27,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("자동차 이름을 담은 배열이 빈값이 아니여서 false 리턴")
-    void checkValidInput_NotEmptyArray(){
+    void isValidCarName_NotEmptyArray(){
         // given, when
         boolean response = validator.isEmptyArray(new String[]{"red"});
 
@@ -38,9 +38,9 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("자동차 이름들 중 5자 미만으로만 구성되어 있어 true 리턴")
-    void checkValidInput_lessThanFiveCharacters(){
+    void isValidCarName_lessThanFiveCharacters(){
         // given, when
-        boolean response = validator.checkValidInput(new String[]{"red", "blue", "pink"});
+        boolean response = validator.isValidCarName(new String[]{"red", "blue", "pink"});
 
         // then
         assertTrue(response);
@@ -48,9 +48,9 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("자동차 이름들 중 5자 이상이 포함되어 있어서 false 리턴")
-    void checkValidInput_MoreFiveCharacters(){
+    void isValidCarName_MoreFiveCharacters(){
         // given, when
-        boolean response = validator.checkValidInput(new String[]{"red", "purple", "green"});
+        boolean response = validator.isValidCarName(new String[]{"red", "purple", "green"});
 
         // then
         assertFalse(response);

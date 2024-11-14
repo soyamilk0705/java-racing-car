@@ -2,24 +2,34 @@ package racingcar;
 
 import racingcar.model.RacingCar;
 import racingcar.model.RacingCars;
+import racingcar.view.ResultView;
+
+import java.util.Map;
+import java.util.Random;
 
 public class RacingCarGame {
     private static final int FORWARD_STANDARD = 4;
+    private static final int MAX_NUM = 9;
+
     private final RacingCars cars;
-    private final RacingCarRandom random;
+    private final Random random = new Random();
 
     public RacingCarGame(RacingCars cars) {
         this.cars = cars;
-        this.random = new RacingCarRandom();
     }
 
     public void play(int repeatNum) {
         for(int i=0; i<repeatNum; i++){
-            for (RacingCar car : cars.getCars()) {
-                race(car, random.createRandomNum());
-            }
-            cars.printCars();
+            playRound();
         }
+    }
+
+    public void playRound(){
+        for (RacingCar car : cars.getCars()) {
+            race(car, random.nextInt(MAX_NUM) + 1);
+            car.printLocation();
+        }
+        System.out.println();
     }
 
 
@@ -29,9 +39,5 @@ public class RacingCarGame {
         }
     }
 
-    public void winner() {
-        cars.printCars();
-        System.out.println(cars.getWinnerName() + "가 최종 우승했습니다.");
-    }
 }
 

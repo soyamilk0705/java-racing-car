@@ -12,7 +12,6 @@ public class RacingCarGameTest {
 
     private RacingCars cars;
 
-
     @BeforeEach
     void setUp(){
         cars = new RacingCars(new String[]{"red", "blue"});
@@ -30,7 +29,7 @@ public class RacingCarGameTest {
         game.race(car1, 4);
 
         // then
-        assertEquals(car1.toString(), "red : -");
+        assertEquals(car1.getLocation(), 1);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class RacingCarGameTest {
         game.race(car1, 3);
 
         // then
-        assertEquals(car1.toString(), "red : ");
+        assertEquals(car1.getLocation(), 0);
     }
 
 }

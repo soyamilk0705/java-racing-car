@@ -21,20 +21,7 @@ public class RacingCar {
         return location;
     }
 
-    @Override
-    public String toString() {
-        return name + " : " + drawLocation(location);
+    public void printLocation() {
+        System.out.println(name + " : " + "-".repeat(location));
     }
-
-    public String drawLocation(int location) {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i=0; i<location; i++){
-            sb.append("-");
-        }
-
-        return sb.toString();
-    }
-
-
 }

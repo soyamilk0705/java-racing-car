@@ -1,6 +1,7 @@
 import racingcar.RacingCarGame;
 import racingcar.scanner.RacingCarScanner;
 import racingcar.model.RacingCars;
+import racingcar.view.ResultView;
 
 public class RacingCarApplication {
     public static void main(String[] args) {
@@ -11,8 +12,9 @@ public class RacingCarApplication {
         RacingCars cars = new RacingCars(result);
         RacingCarGame game = new RacingCarGame(cars);
         game.play(repeatNum);
-        game.winner();
 
+        ResultView resultView = new ResultView(cars);
+        resultView.printWinner();
 
     }
 }

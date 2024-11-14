@@ -1,25 +1,15 @@
 package racingcar.validation;
 
-import racingcar.message.ErrorMessages;
+import racingcar.message.RacingCarMessages;
+
+import java.util.Arrays;
 
 public class InputValidator {
     public static final int LIMIT_NAME_LENGTH = 5;
 
-    public boolean checkValidInput(String[] inputArr) {
-        if (isEmptyArray(inputArr)){
-            System.out.println(ErrorMessages.INVALID_INPUT_CAR_NAME);
-            return false;
+    public boolean isValidCarName(String[] inputArr) {
+        return !isEmptyArray(inputArr) && Arrays.stream(inputArr).allMatch(this::isLessThanFiveCharacters);
         }
-
-        for (String input : inputArr) {
-            if (!isLessThanFiveCharacters(input)){
-                System.out.println(ErrorMessages.INVALID_INPUT_CAR_NAME);
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     public boolean isEmptyArray(String[] inputArr) {
         return inputArr.length == 0;
@@ -30,15 +20,17 @@ public class InputValidator {
     }
 
     public boolean isEmptyInput(String input) {
-        return input.isEmpty();
+        if (input.isEmpty()){
+            System.out.println(RacingCarMessages.INVALID_INPUT_EMPTY);
+            return true;
+        }
+        return false;
     }
 
 
-    public boolean isNumberInput(String input){
-        try {
-            Integer.parseInt(input);
-        } catch (Exception e){
-            System.out.println(ErrorMessages.INVALID_INPUT_REPEAT);
+    public boolean isNumberInput(String input) {
+        if (!input.matches("\\d+")) {
+            System.out.println(RacingCarMessages.INVALID_INPUT_REPEAT);
             return false;
         }
 

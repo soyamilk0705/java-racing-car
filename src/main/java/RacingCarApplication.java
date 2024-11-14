@@ -1,20 +1,17 @@
 import racingcar.RacingCarGame;
-import racingcar.scanner.RacingCarScanner;
 import racingcar.model.RacingCars;
-import racingcar.view.ResultView;
+import racingcar.scanner.RacingCarScanner;
 
 public class RacingCarApplication {
     public static void main(String[] args) {
         RacingCarScanner scanner = new RacingCarScanner();
-        String[] result = scanner.inputCarNames();
-        int repeatNum = scanner.inputRepeat();
 
-        RacingCars cars = new RacingCars(result);
+        RacingCars cars = new RacingCars(scanner.inputCarNames());
+
         RacingCarGame game = new RacingCarGame(cars);
-        game.play(repeatNum);
+        game.play(scanner.inputRepeat());
+        game.printWinner();
 
-        ResultView resultView = new ResultView(cars);
-        resultView.printWinner();
 
     }
 }

@@ -21,7 +21,7 @@ public class RacingCar {
         return location;
     }
 
-    public void printLocation() {
-        System.out.println(name + " : " + "-".repeat(location));
+    public String formatRacingCar() {
+        return name + " : " + "-".repeat(location);
     }
 }

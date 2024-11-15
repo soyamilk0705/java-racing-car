@@ -26,10 +26,20 @@ class InputValidatorTest {
     }
 
     @Test
-    @DisplayName("자동차 이름을 담은 배열이 빈값이 아니여서 false 리턴")
+    @DisplayName("자동차 이름을 담은 배열이 빈값이 아니고 5자 미만으로 true 리턴")
     void isValidCarName_NotEmptyArray(){
         // given, when
-        boolean response = validator.isEmptyArray(new String[]{"red"});
+        boolean response = validator.isValidCarName(new String[]{"red"});
+
+        // then
+        assertTrue(response);
+    }
+
+    @Test
+    @DisplayName("자동차 이름들 중 5자 이상이 포함되어 있어서 false 리턴")
+    void isValidCarName_MoreFiveCharacters(){
+        // given, when
+        boolean response = validator.isValidCarName(new String[]{"red", "purple", "green"});
 
         // then
         assertFalse(response);
@@ -46,15 +56,6 @@ class InputValidatorTest {
         assertTrue(response);
     }
 
-    @Test
-    @DisplayName("자동차 이름들 중 5자 이상이 포함되어 있어서 false 리턴")
-    void isValidCarName_MoreFiveCharacters(){
-        // given, when
-        boolean response = validator.isValidCarName(new String[]{"red", "purple", "green"});
-
-        // then
-        assertFalse(response);
-    }
 
     @Test
     @DisplayName("자동차 이름을 담은 배열이 빈값으로 true 리턴")
@@ -123,7 +124,7 @@ class InputValidatorTest {
     @DisplayName("반복횟수 입력 시 숫자 문자열 입력으로 true 반환")
     void isNumberInput(){
         // given, when
-        boolean response = validator.isNumberInput("3");
+        boolean response = validator.isNumberInput("3456");
 
         // then
         assertTrue(response);

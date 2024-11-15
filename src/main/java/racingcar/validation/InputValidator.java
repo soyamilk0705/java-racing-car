@@ -1,6 +1,6 @@
 package racingcar.validation;
 
-import racingcar.message.RacingCarMessages;
+import racingcar.view.ErrorView;
 
 import java.util.Arrays;
 
@@ -9,7 +9,7 @@ public class InputValidator {
 
     public boolean isValidCarName(String[] inputArr) {
         return !isEmptyArray(inputArr) && Arrays.stream(inputArr).allMatch(this::isLessThanFiveCharacters);
-        }
+    }
 
     public boolean isEmptyArray(String[] inputArr) {
         return inputArr.length == 0;
@@ -21,7 +21,7 @@ public class InputValidator {
 
     public boolean isEmptyInput(String input) {
         if (input.isEmpty()){
-            System.out.println(RacingCarMessages.INVALID_INPUT_EMPTY);
+            ErrorView.invalidInputEmpty();
             return true;
         }
         return false;
@@ -30,7 +30,7 @@ public class InputValidator {
 
     public boolean isNumberInput(String input) {
         if (!input.matches("\\d+")) {
-            System.out.println(RacingCarMessages.INVALID_INPUT_REPEAT);
+            ErrorView.invalidInputRepeat();
             return false;
         }
 

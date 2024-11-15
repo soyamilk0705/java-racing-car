@@ -2,6 +2,7 @@ package racingcar;
 
 import racingcar.model.RacingCar;
 import racingcar.model.RacingCars;
+import racingcar.view.ResultView;
 
 import java.util.Random;
 
@@ -25,9 +26,9 @@ public class RacingCarGame {
     public void playRound(){
         for (RacingCar car : cars.getCars()) {
             race(car, random.nextInt(MAX_NUM) + 1);
-            car.printLocation();
+            ResultView.displayRacingCar(car);
         }
-        System.out.println();
+        ResultView.printNewLine();
     }
 
 
@@ -37,11 +38,9 @@ public class RacingCarGame {
         }
     }
 
-    public void printWinner() {
-        for (RacingCar car : cars.getCars()){
-            car.printLocation();
-        }
-        System.out.println("\n" + cars.getWinnerName() + "가 최종 우승했습니다.");
+    public void winner() {
+        ResultView.displayRacingCars(cars);
+        ResultView.printWinner(cars.getWinnerName());
     }
 }
 

@@ -1,7 +1,8 @@
 package racingcar.scanner;
 
 import racingcar.validation.InputValidator;
-import racingcar.message.RacingCarMessages;
+import racingcar.view.ErrorView;
+import racingcar.view.InputView;
 
 import java.util.Scanner;
 
@@ -16,29 +17,27 @@ public class RacingCarScanner {
 
     public String[] inputCarNames(){
         while (true) {
-            String input = getInputWithMessage(RacingCarMessages.INPUT_CAR_NAMES);
+            InputView.inputCarName();
+            String input = scanner.nextLine();
 
             if (validator.isEmptyInput(input)) {
                 continue;
             }
 
             String[] inputArr = splitComma(input);
-
             if (validator.isValidCarName(inputArr)){
                 return inputArr;
             }
 
-            System.out.println(RacingCarMessages.INVALID_INPUT_CAR_NAME);
-
+            ErrorView.invalidInputCarName();
         }
     }
 
 
     public int inputRepeat() {
-        String repeatString;
-
         while(true){
-            repeatString = getInputWithMessage(RacingCarMessages.INPUT_REPEAT_NUM);
+            InputView.inputRepeatNum();
+            String repeatString = scanner.nextLine();
 
             if (validator.isEmptyInput(repeatString)){
                 continue;
@@ -48,11 +47,6 @@ public class RacingCarScanner {
                 return Integer.parseInt(repeatString);
             }
         }
-    }
-
-    public String getInputWithMessage(String message){
-        System.out.println(message);
-        return scanner.nextLine();
     }
 
 

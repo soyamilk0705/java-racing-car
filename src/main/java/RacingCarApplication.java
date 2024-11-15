@@ -10,7 +10,7 @@ public class RacingCarApplication {
 
         RacingCarGame game = new RacingCarGame(cars);
         game.play(scanner.inputRepeat());
-        game.printWinner();
+        game.winner();
 
 
     }

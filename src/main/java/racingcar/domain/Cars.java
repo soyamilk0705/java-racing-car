@@ -6,10 +6,9 @@ import racingcar.validation.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cars {
-    private static final int RANDOM_NUMBER_STANDARD = 4;
-
     private final List<Car> cars;
 
     public Cars(String carNameStr) {
@@ -26,25 +25,23 @@ public class Cars {
         }
     }
 
-
-    public RaceResult race(int repeatNum){
-        RaceResult raceResult = new RaceResult(cars);
-        for(int i=0; i<repeatNum; i++){
-            raceRound(raceResult);
-        }
-
-        return raceResult;
+    public List<Car> getCars(){
+        return List.copyOf(cars);
     }
 
-    public void raceRound(RaceResult raceResult) {
-        for(Car car : cars){
-            int randomNumber = RacingCarUtil.createRandomNumber();
-            if (randomNumber >= RANDOM_NUMBER_STANDARD){
-                car.move();
-            }
-        }
-        raceResult.printAllRaceResult();
+    public String getWinnerName(){
+        int winnerLocation = cars.stream()
+                .mapToInt(Car::getLocation)
+                .max()
+                .orElse(0);
+
+
+        return cars.stream()
+                .filter(car -> car.getLocation() == winnerLocation)
+                .map(Car::getName)
+                .collect(Collectors.joining(", "));
     }
+
 
 
 

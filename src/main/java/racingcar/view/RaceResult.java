@@ -1,19 +1,17 @@
 package racingcar.view;
 
 import racingcar.domain.Car;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import racingcar.domain.Cars;
 
 public class RaceResult {
-    private final List<Car> cars;
+    private final Cars cars;
 
-    public RaceResult(List<Car> cars) {
+    public RaceResult(Cars cars) {
         this.cars = cars;
     }
 
     public void printAllRaceResult(){
-        for(Car car : cars){
+        for(Car car : cars.getCars()){
             System.out.println(drawRaceResult(car));
         }
         System.out.println();
@@ -24,16 +22,7 @@ public class RaceResult {
     }
 
     public void printWinner(){
-        int winnerLocation = cars.stream()
-                .mapToInt(Car::getLocation)
-                .max()
-                .orElse(0);
-
-
-        String winnerName = cars.stream()
-                .filter(car -> car.getLocation() == winnerLocation)
-                .map(Car::getName)
-                .collect(Collectors.joining(", "));
+        String winnerName = cars.getWinnerName();
 
         System.out.println(winnerName + "가 최종 우승했습니다.");
 

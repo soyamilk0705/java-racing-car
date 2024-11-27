@@ -36,6 +36,10 @@ public class Position {
         return position;
     }
 
+    public boolean isSame(int maxPosition) {
+        return this.position == maxPosition;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,5 +51,9 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hashCode(position);
+    }
+
+    public boolean lessThan(Position maxPosition) {
+        return false;
     }
 }

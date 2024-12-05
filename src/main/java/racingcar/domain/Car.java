@@ -1,24 +1,40 @@
 package racingcar.domain;
 
 public class Car {
-    private String name;
-    private int location;
+    private static final int FORWARD_NUM = 4;
+
+    private Name name;
+    private Location location;
 
     public Car(String name) {
-        this.name = name;
-        this.location = 0;
+        this.name = new Name(name);
+        this.location = new Location();
     }
 
-    public void move() {
-        location++;
+    public void move(int randomNum) {
+        if (randomNum >= FORWARD_NUM){
+            location.forward();
+        }
     }
 
-    public String getName(){
+    public boolean isWinner(Location maxLocation){
+        return location.equals(maxLocation);
+    }
+
+    public Location getMaxLocation(Location maxLocation) {
+        return location.lessThan(maxLocation);
+    }
+
+    public Name getName(){
         return name;
     }
 
-    public int getLocation() {
+    public Location getLocation() {
         return location;
     }
 
+    @Override
+    public String toString() {
+        return name.toString() + " : " + location.toString();
+    }
 }

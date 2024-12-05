@@ -1,8 +1,8 @@
 package racingcar.domain;
 
-import racingcar.view.RaceResult;
+import racingcar.exception.CarException;
+import racingcar.exception.messages.ErrorMessages;
 import racingcar.util.RacingCarUtil;
-import racingcar.validation.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,28 +20,37 @@ public class Cars {
         String[] carNames = RacingCarUtil.splitName(carNameStr);
 
         for (String carName : carNames){
-            Validator.checkValidCarName(carName);
+            if(!Name.isNameLengthLessThanFive(carName)){
+                throw new CarException(ErrorMessages.CAR_NAME_OVER_FIVE);
+            }
             cars.add(new Car(carName));
         }
+    }
+
+    public String getWinnerName(){
+        Location maxLocation = getMaxLocation();
+
+        return cars.stream()
+                .filter(car -> car.isWinner(maxLocation))
+                .map(car -> car.getName().toString())
+                .collect(Collectors.joining(", "));
+
+    }
+
+    public Location getMaxLocation(){
+        Location maxLocation = new Location();
+
+        for(Car car : cars){
+            maxLocation = car.getMaxLocation(maxLocation);
+        }
+
+        return maxLocation;
+
     }
 
     public List<Car> getCars(){
         return List.copyOf(cars);
     }
-
-    public String getWinnerName(){
-        int winnerLocation = cars.stream()
-                .mapToInt(Car::getLocation)
-                .max()
-                .orElse(0);
-
-
-        return cars.stream()
-                .filter(car -> car.getLocation() == winnerLocation)
-                .map(Car::getName)
-                .collect(Collectors.joining(", "));
-    }
-
 
 
 
